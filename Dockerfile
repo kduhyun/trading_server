@@ -9,8 +9,8 @@ RUN pip install --no-cache-dir --upgrade pip && \
 
 ENV FLASK_APP=/myapp/trading_server.py
 ENV FLASK_ENV=production
-ENV OANDA_TOKEN="your_oanda_token"
-ENV BYBIT_API_KEY="your_bybit_api_key"
-ENV BYBIT_API_SECRET="your_bybit_api_secret"
+ENV OANDA_TOKENS="your_oanda_tokens separated by comma(,)"
+ENV BYBIT_API_KEYS="your_bybit_api_keys separated by comma(,)"
+ENV BYBIT_API_SECRETS="your_bybit_api_secrets separated by comma(,)"
 
 CMD flask run --host=0.0.0.0
