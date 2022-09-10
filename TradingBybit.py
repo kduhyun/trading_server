@@ -10,7 +10,7 @@ class TradingBybit:
             api_secret=bybitApiSecret
         )
 
-    def orderForBybit(self, code, position, price, positionSize, action):
+    def order(self, code, position, price, positionSize, action):
 
         code = code.upper()
 

@@ -3,8 +3,8 @@ from flask import Flask, request, jsonify
 import yaml
 import logging
 import os
-import TradingOanda
-import TradingBybit
+from TradingOanda import TradingOanda
+from TradingBybit import TradingBybit
 
 ##windows: set FLASK_APP=trading_server.py
 ##linux: export FLASK_APP=trading_server.py
@@ -13,16 +13,18 @@ import TradingBybit
 app = Flask(__name__)
 app.logger.setLevel(logging.INFO)
 
-oandaTokens = os.getenv("OANDA_TOKENS", "").split(",")
+oandaTokens = list(filter(None, os.getenv("OANDA_TOKENS", "").split(",")))
+print(oandaTokens)
+
 tradingOandas = []
 for oandaToken in oandaTokens:
     tradingOandas.append(TradingOanda(oandaToken))
 
-bybitApiKeys = os.getenv("BYBIT_API_KEYS", "").split(",")
-bybitApiSecrets = os.getenv("BYBIT_API_SECRETS", "").split(",")
+bybitApiKeys = list(filter(None, os.getenv("BYBIT_API_KEYS", "").split(",")))
+bybitApiSecrets = list(filter(None, os.getenv("BYBIT_API_SECRETS", "").split(",")))
 tradingBybits = []
 
-for idx in min(len(bybitApiKeys), len(bybitApiSecrets)):
+for idx in range(min(len(bybitApiKeys), len(bybitApiSecrets))):
     tradingBybits.append(TradingBybit(bybitApiKeys[idx], bybitApiSecrets[idx]))
 
 def orderInOanda(code, position, price, positionSize, action):

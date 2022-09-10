@@ -83,7 +83,6 @@ class TradingOanda:
                 "positionFill":"DEFAULT"
             }
             response=self.oandaAPI.order.market( self.oandaMainAccountId, **order )
-            app.logger.info(response.body)
             output = response.get("lastTransactionID")
         elif action == "close":
             order = {}
@@ -99,7 +98,6 @@ class TradingOanda:
                 }
 
             response = self.oandaAPI.position.close(self.oandaMainAccountId, **order)
-            app.logger.info(response.body)
             output = response.get("lastTransactionID")
 
         return output
