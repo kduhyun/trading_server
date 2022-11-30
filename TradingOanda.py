@@ -62,6 +62,11 @@ class TradingOanda:
             marginRequired = 6
             roundFigure = 0
             instrument = "XAG_USD"
+        elif code == "A50":
+            marginRequired = 2930
+            roundFigure = 0
+            instrument = "CN50_USD"
+
 
 
         quantity = round((myBalance/marginRequired)*positionSize, roundFigure)
